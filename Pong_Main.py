@@ -69,15 +69,34 @@ player2_movedown = False
 ball = pygame.image.load("assets/ball.png")
 ball_x = 617
 ball_y = 337
-
+ball_dir = 5
+ball_dir_y = 1
 
 def move_ball():
 
     global ball_x
     global ball_y
+    global ball_dir
+    global ball_dir_y
 
-    ball_x += 1
+    ball_x += ball_dir
+    ball_y += ball_dir_y
 
+    if ball_x < 120:
+        if player1_y < ball_y + 23:
+            if player1_y + 146 > ball_y:
+                ball_dir *= -1
+
+    if ball_x > 1100:
+        if player2_y < ball_y + 23:
+            if player2_y + 146 > ball_y:
+                ball_dir *= -1
+
+    if ball_y > 685:
+        ball_dir_y *= -1
+    elif ball_y <= 0:
+        ball_dir_y *= -1 
+    
 
 def draw():
     window.blit(field, (0, 0))
